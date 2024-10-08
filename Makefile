@@ -6,7 +6,7 @@
 #    By: marcnava <marcnava@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/26 17:33:23 by marcnava          #+#    #+#              #
-#    Updated: 2024/10/08 14:43:47 by marcnava         ###   ########.fr        #
+#    Updated: 2024/10/08 19:17:28 by marcnava         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,8 @@ HEADER		=	ft_printf.h
 SRCS 		=	\
 				ft_printf.c \
 				ft_printf_utils.c \
-				ft_conversion_utils.c
+				ft_conversion_utils.c \
+				ft_mod_printf.c
 
 OBJS		=	$(SRCS:.c=.o)
 
