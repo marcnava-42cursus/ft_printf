@@ -6,7 +6,7 @@
 /*   By: marcnava <marcnava@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 15:33:17 by marcnava          #+#    #+#             */
-/*   Updated: 2024/10/16 18:57:58 by marcnava         ###   ########.fr       */
+/*   Updated: 2024/10/17 18:22:56 by marcnava         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ typedef struct s_flags
 	// + \32
 	char	plusspace;
 	// Longitud
-	int		lenght;
+	int		length;
 	// .
 	int		precision;
 	// Letra
@@ -33,6 +33,7 @@ typedef struct s_flags
 	bool	error;
 }	t_flags;
 
-int	ft_printf_bonus(char const *format);
+int		ft_printf_bonus(char const *format);
+t_flags	*ft_check_flags(char const *format);
 
 #endif
