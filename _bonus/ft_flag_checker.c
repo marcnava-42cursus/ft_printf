@@ -1,87 +1,60 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_flag_checker.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: marcnava <marcnava@student.42madrid.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/22 20:47:24 by marcnava          #+#    #+#             */
+/*   Updated: 2024/10/22 21:36:51 by marcnava         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf_bonus.h"
-#include "../libft/libft.h"
 
-int is_flag(char c)
+t_flags	parse_format(const char *str)
 {
-    return (ft_strchr("#+-0 ", c) != NULL);
+	t_flags		flags;
+	const char	*ptr = str;
+
+	init_flags(&flags);
+	if (*ptr != '%')
+	{
+		flags.error = 1;
+		return (flags);
+	}
+	ptr++;
+	if (!parse_flags(&ptr, &flags)
+		|| !parse_length(&ptr, &flags)
+		|| !parse_precision(&ptr, &flags)
+		|| !parse_modifier(&ptr, &flags))
+		flags.error = 1;
+	return (flags);
 }
 
-t_flags parse_format(const char *str)
+void	print_flags(const t_flags *flags)
 {
-    t_flags flags = {0};
-    const char *ptr = str;
-
-    if (*ptr != '%')
-    {
-        flags.error = true;
-        return (flags);
-    }
-    ptr++;
-    while (is_flag(*ptr))
-    {
-        if (*ptr == '#')
-            flags.adapter = true;
-        else if (*ptr == '-')
-            flags.minuszero = '-';
-        else if (*ptr == '0' && flags.minuszero != '-')
-            flags.minuszero = '0';
-        else if (*ptr == '+')
-            flags.plusspace = '+';
-        else if (*ptr == ' ' && flags.plusspace != '+')
-            flags.plusspace = ' ';
-        ptr++;
-    }
-    if (is_flag(*ptr))
-    {
-        flags.error = true;
-        return (flags);
-    }
-    flags.length = 0;
-    while (ft_isdigit(*ptr))
-    {
-        flags.length = flags.length * 10 + (*ptr - '0');
-        ptr++;
-    }
-    if (*ptr == '.')
-    {
-        ptr++;
-        flags.precision = 0;
-        while (ft_isdigit(*ptr))
-        {
-            flags.precision = flags.precision * 10 + (*ptr - '0');
-            ptr++;
-        }
-    }
-    else
-        flags.precision = -1;
-    if (ft_isalpha(*ptr))
-    {
-        flags.modifier = *ptr;
-    }
-    else
-        flags.error = true;
-    return (flags);
+	printf("\tAdapter (#): %d\n", flags->adapter);
+	printf("\tMinusZero (-/0): %c\n", flags->minuszero);
+	printf("\tPlusSpace (+/space): %c\n", flags->plusspace);
+	printf("\tLength: %d\n", flags->length);
+	printf("\tPrecision: %d\n", flags->precision);
+	printf("\tModifier: %c\n", flags->modifier);
+	printf("\tError: %d\n", flags->error);
 }
 
-void print_flags(const t_flags *flags)
+int	is_flag(char c)
 {
-    printf("Adapter (#): %d\n", flags->adapter);
-    printf("MinusZero (-/0): %c\n", flags->minuszero);
-    printf("PlusSpace (+/space): %d\n", flags->plusspace);
-    printf("Length: %d\n", flags->length);
-    printf("Precision: %d\n", flags->precision);
-    printf("Modifier: %c\n", flags->modifier);
-    printf("Error: %d\n", flags->error);
+	return (ft_strchr("#+-0 ", c) != NULL);
 }
 
-int main()
+void	init_flags(t_flags *flags)
 {
-    const char *test = "%##-# ++ 20.5s";
-
-    t_flags flags1 = parse_format(test);
-
-    printf("Test 1: %s\n", test);
-    print_flags(&flags1);
-
-    return (0);
+	flags->adapter = 0;
+	flags->minuszero = '\0';
+	flags->plusspace = '\0';
+	flags->length = 0;
+	flags->precision = -1;
+	flags->modifier = '\0';
+	flags->error = 0;
 }
