@@ -6,7 +6,7 @@
 #    By: marcnava <marcnava@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/26 17:33:23 by marcnava          #+#    #+#              #
-#    Updated: 2024/10/14 19:14:14 by marcnava         ###   ########.fr        #
+#    Updated: 2024/10/31 16:09:09 by marcnava         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,7 @@ OBJS_B		=	$(SRCS_B:.c=.o)
 all: 			$(NAME)
 
 $(NAME):		$(OBJS)
-				cd libft && make && make bonus
+				cd libft && make && make bonus && make clean
 				mv libft/libft.a $(NAME) && cd ..
 				$(LIB) $(NAME) $(OBJS)
 
