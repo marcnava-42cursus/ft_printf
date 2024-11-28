@@ -141,9 +141,9 @@ int	main(void)
 	fflush(stdout);
 	printf("\n");
 	fflush(stdout);
-	printf("ft_printf:\t\twww");
+	printf("ft_printf:\t\t");
 	fflush(stdout);
-	len_ft = ft_printf("test%%%ttt");
+	len_ft = ft_printf("test%%%www");
 	printf("\n");
 	fflush(stdout);
 	err += print_result(len_o, len_ft);
