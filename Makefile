@@ -6,7 +6,7 @@
 #    By: marcnava <marcnava@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/26 17:33:23 by marcnava          #+#    #+#              #
-#    Updated: 2024/10/31 16:09:09 by marcnava         ###   ########.fr        #
+#    Updated: 2025/01/21 16:58:37 by marcnava         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ CFLAGS		=	-Wall -Wextra -Werror
 COMPILER	=	$(CC) $(CFLAGS)
 LIB			=	ar rcs
 
-HEADER		=	ft_printf.h
+LIBFT		=	./libft
 
 # *************************************************************************** #
 #		FILES		#
@@ -34,36 +34,29 @@ SRCS 		=	\
 				ft_conversion_utils.c \
 				ft_mod_printf.c
 
-SRCS_B		=	\
-				_bonus/ft_printf_bonus.c
-
 OBJS		=	$(SRCS:.c=.o)
-OBJS_B		=	$(SRCS_B:.c=.o)
 
 # *************************************************************************** #
 #		RULES		#
 
 all: 			$(NAME)
 
-$(NAME):		$(OBJS)
-				cd libft && make && make bonus && make clean
-				mv libft/libft.a $(NAME) && cd ..
-				$(LIB) $(NAME) $(OBJS)
+$(LIBFT)/libft.a:
+				@$(MAKE) --no-print-directory -C $(LIBFT)
 
-.o:				.c $(HEADER)
+$(NAME):		$(OBJS) $(LIBFT)/libft.a
+				$(LIB) $(NAME) $(OBJS) $(LIBFT)/libft.a
+				@$(MAKE) fclean --no-print-directory -C $(LIBFT)
+
+.o:				.c
 				$(COMPILER) -c $< -o $@
 
 clean:
-				$(RM) $(OBJS) $(OBJS_B)
-				cd libft && make fclean
-				cd ..
+				$(RM) $(OBJS)
 
 fclean:			clean
 				$(RM) $(NAME)
 
 re:				fclean all
-
-bonus:			$(NAME) $(OBJS_B)
-				$(LIB) $(NAME) $(OBJS_B)
 
 .PHONY:			all clean fclean re bonus

@@ -6,7 +6,7 @@
 /*   By: marcnava <marcnava@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 19:57:48 by marcnava          #+#    #+#             */
-/*   Updated: 2024/10/16 15:47:33 by marcnava         ###   ########.fr       */
+/*   Updated: 2025/01/21 16:42:07 by marcnava         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # include <stdarg.h>
 # include <unistd.h>
 # include <stdint.h>
+
+# include "libft/headers/libft.h"
 
 # define FT_MAYUS 0
 # define FT_MINUS 1

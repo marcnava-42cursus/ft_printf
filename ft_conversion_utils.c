@@ -6,12 +6,11 @@
 /*   By: marcnava <marcnava@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 18:17:31 by marcnava          #+#    #+#             */
-/*   Updated: 2024/10/17 13:51:51 by marcnava         ###   ########.fr       */
+/*   Updated: 2025/01/21 16:42:23 by marcnava         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include "libft/libft.h"
 
 void	ft_print_hex(uintptr_t n, int *size, unsigned int capitalize)
 {
